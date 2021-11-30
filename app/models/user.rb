@@ -9,10 +9,10 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
 
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followed, class_name: "Relatiomship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following_user, through: "follower", source: "followed"
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed
   # following_user:中間テーブルを通してfollowedモデルのフォローされる側を取得すること
-  has_many :follower_user, through: "followed", source: "follower"
+  has_many :follower_user, through: :followed, source: :follower
   # follower_user:中間テーブルを通してfollowerモデルのフォローする側を取得すること
 
 # ユーザーをフォローするメソッド
