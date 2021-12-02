@@ -13,7 +13,7 @@
         <tr>
           <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
           <%= link_to user_path(user) do %>
-            <td><%= user.user.name %></td>
+            <td><%= user.name %></td>
           <%end%>
         </tr>
       <%end%>
@@ -34,7 +34,7 @@
     <tbody>
       <% @records.each do |book| %>
         <tr>
-          <td><%= attachment_image_tag(book, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+          <td><%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
           <%= link_to book_path(book) do %>
             <td><%= book.title %></td>
           <%end%>
