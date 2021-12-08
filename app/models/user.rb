@@ -8,7 +8,14 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_books, through: :favorites, source: :book
   has_many :book_comments, dependent: :destroy
-
+  
+  has_many :room_users
+  # UsersテーブルとRoomsテーブルは多対多の関係
+  # そのため、中間テーブルとしてroom_usersテーブルをおき、その情報を管理します。
+  has_many :messages
+  # またRoomsでは、複数（2人）のユーザーが複数のメッセージを送る多対多の関係なので、
+  # これも中間テーブルとしてMessagesテーブルをおき、その情報を管理します。
+  
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
