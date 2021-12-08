@@ -4,6 +4,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    
+    @currentRoomUser = RoomUser.where(user_id: current_user.id)
+    #current_userが既にルームに参加しているか判断
+    @receiveUser = RoomUser.where(user_id: @user.id)
+    #他の@userがルームに参加しているか判断
+    
+    unless @user.id == current_user.id  #current_userと@userが一致していなければ
+      @currentRoomUser.each do |cu|  #current_userが参加していルームを取り出す
+        @receiveUser.each do |u|  #@userが参加しているルームを取り出す
+          
+    
     @books = @user.books
     @book = Book.new
     @following_users = @user.following_user
